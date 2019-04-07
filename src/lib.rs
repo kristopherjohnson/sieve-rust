@@ -25,15 +25,15 @@ pub fn sieve(max: usize) -> Vec<usize> {
 }
 
 /// Return an iterator that will return prime numbers up to the given maximum.
-pub fn sieve_iter(n: usize) -> Iter {
-    Iter::with_maximum(n)
+pub fn sieve_iter(max: usize) -> Iter {
+    Iter::with_maximum(max)
 }
 
 /// Iterator for prime numbers up to some maximum value.
 pub struct Iter {
     max: usize,
     is_prime: Vec<bool>,
-    next_index: usize,
+    next_p: usize,
 }
 
 impl Iter {
@@ -41,7 +41,7 @@ impl Iter {
         Iter {
             max,
             is_prime: vec![true; max + 1],
-            next_index: 2,
+            next_p: 2,
         }
     }
 }
@@ -50,15 +50,15 @@ impl Iterator for Iter {
     type Item = usize;
 
     fn next(&mut self) -> Option<usize> {
-        while self.next_index <= self.max && !self.is_prime[self.next_index] {
-            self.next_index += 1;
+        let mut p = self.next_p;
+        while p <= self.max && !self.is_prime[p] {
+            p += 1;
         }
-        if self.next_index >= self.max {
+        if p > self.max {
             return None;
         }
 
-        let p = self.next_index;
-        self.next_index += 1;
+        self.next_p = p + 1;
 
         let mut mult = p * p;
         while mult <= self.max {
