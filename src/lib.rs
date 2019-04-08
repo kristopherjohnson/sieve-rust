@@ -47,7 +47,7 @@ pub fn sieve(max: usize) -> Vec<usize> {
 /// # use sieve::sieve_iter;
 /// let mut primes = String::from("Primes:");
 /// for prime in sieve_iter(20) {
-///     primes = primes + &format!(" {}", prime);
+///     primes.push_str(&format!(" {}", prime));
 /// }
 /// assert_eq!(primes, "Primes: 2 3 5 7 11 13 17 19");
 
@@ -62,8 +62,8 @@ pub fn sieve_iter(max: usize) -> Iter {
 /// # Example
 ///
 /// ```
-/// # use sieve::{sieve_iter, Iter};
-/// let mut iter: Iter = sieve_iter(100);
+/// # use sieve::sieve_iter;
+/// let mut iter: sieve::Iter = sieve_iter(100);
 /// assert_eq!(iter.next(), Some(2));
 /// assert_eq!(iter.next(), Some(3));
 /// assert_eq!(iter.next(), Some(5));
