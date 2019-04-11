@@ -113,14 +113,19 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_2() {
+    fn test_sieve_2() {
         let primes = sieve(2);
         assert_eq!(primes.len(), 1);
         assert_eq!(primes[0], 2);
     }
 
     #[test]
-    fn test_100() {
+    fn test_sieve_20() {
+        assert_eq!(sieve(20), vec!(2, 3, 5, 7, 11, 13, 17, 19));
+    }
+
+    #[test]
+    fn test_sieve_100() {
         let primes = sieve(100);
         assert_eq!(primes.len(), 25);
         assert_eq!(primes[0], 2);
@@ -128,7 +133,7 @@ mod tests {
     }
 
     #[test]
-    fn test_1000() {
+    fn test_sieve_1000() {
         let primes = sieve(1000);
         assert_eq!(primes.len(), 168);
         assert_eq!(primes[0], 2);
@@ -136,7 +141,7 @@ mod tests {
     }
 
     #[test]
-    fn test_iter() {
+    fn test_sieve_iter_15() {
         let mut iter = sieve_iter(15);
         assert_eq!(iter.next().unwrap(), 2);
         assert_eq!(iter.next().unwrap(), 3);
@@ -148,8 +153,8 @@ mod tests {
     }
 
     #[test]
-    fn test_iter_1000() {
-        let primes: Vec<usize> = sieve_iter(1000).collect();
+    fn test_sieve_iter_1000() {
+        let primes = sieve_iter(1000).collect::<Vec<_>>();
         assert_eq!(primes.len(), 168);
         assert_eq!(primes[0], 2);
         assert_eq!(primes[167], 997);
