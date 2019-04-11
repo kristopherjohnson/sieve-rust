@@ -1,13 +1,18 @@
 use sieve::sieve_iter;
 
 use std::env;
+use std::process;
 
 fn main() {
     let mut max = 100;
 
     let args = env::args().collect::<Vec<String>>();
     if args.len() == 2 {
-        max = usize::from_str_radix(&args[1], 10).unwrap();
+        max = args[1].parse().unwrap();
+    } else if args.len() != 1 {
+        eprintln!("usage: {} [MAX]", args[0]);
+        eprintln!("       Default maximum is {}.", max);
+        process::exit(-1);
     }
 
     let mut count = 0;
