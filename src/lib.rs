@@ -15,6 +15,7 @@ use std::f64;
 /// assert_eq!(primes[22], 83);
 /// assert_eq!(primes[23], 89);
 /// assert_eq!(primes[24], 97);
+/// ```
 
 pub fn sieve(max: usize) -> Vec<usize> {
     let mut primes: Vec<usize> = Vec::new();
@@ -50,6 +51,7 @@ pub fn sieve(max: usize) -> Vec<usize> {
 ///     primes.push_str(&format!(" {}", prime));
 /// }
 /// assert_eq!(primes, "Primes: 2 3 5 7 11 13 17 19");
+/// ```
 
 pub fn sieve_iter(max: usize) -> Iter {
     Iter::with_maximum(max)
@@ -67,6 +69,7 @@ pub fn sieve_iter(max: usize) -> Iter {
 /// assert_eq!(iter.next(), Some(2));
 /// assert_eq!(iter.next(), Some(3));
 /// assert_eq!(iter.next(), Some(5));
+/// ```
 
 pub struct Iter {
     max: usize,
@@ -113,6 +116,18 @@ mod tests {
     use super::*;
 
     #[test]
+    fn test_sieve_0() {
+        let primes = sieve(1);
+        assert_eq!(primes.len(), 0);
+    }
+
+    #[test]
+    fn test_sieve_1() {
+        let primes = sieve(1);
+        assert_eq!(primes.len(), 0);
+    }
+
+    #[test]
     fn test_sieve_2() {
         let primes = sieve(2);
         assert_eq!(primes.len(), 1);
@@ -138,6 +153,25 @@ mod tests {
         assert_eq!(primes.len(), 168);
         assert_eq!(primes[0], 2);
         assert_eq!(primes[167], 997);
+    }
+
+    #[test]
+    fn test_sieve_iter_0() {
+        let mut iter = sieve_iter(0);
+        assert!(iter.next().is_none());
+    }
+
+    #[test]
+    fn test_sieve_iter_1() {
+        let mut iter = sieve_iter(1);
+        assert!(iter.next().is_none());
+    }
+
+    #[test]
+    fn test_sieve_iter_2() {
+        let mut iter = sieve_iter(2);
+        assert_eq!(iter.next().unwrap(), 2);
+        assert!(iter.next().is_none());
     }
 
     #[test]
